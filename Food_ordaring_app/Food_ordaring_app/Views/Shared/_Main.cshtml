@@ -1,0 +1,286 @@
+﻿@inject UserManager<AppUser> userManager
+@{
+    AppUser user;
+    if (User.Identity.IsAuthenticated)
+        user = await userManager.GetUserAsync(User);
+    else user = null;
+    
+    string activeController = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+    string activeAction = ViewContext.RouteData.Values["Action"].ToString().ToLower();
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>@ViewData["Title"] - Food </title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <a class="navbar-brand" href="#"><img  src="/img/logo.png"/></a>
+
+                   
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                             <li class="nav-item">
+                        <a class="nav-link" href="#home">home</a>
+                        </li>
+                         <li class="nav-item">
+                        <a class="nav-link" href="#">about</a>
+                        </li>
+         <li class="nav-item">
+                        <a class="nav-link" href="#food">food</a></a>
+                        </li>
+                         @if (User.Identity.IsAuthenticated && User.IsInRole("ResturantEmployee"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link"asp-action="Index" asp-controller="Admin">Admin</a>
+                        </li>}
+          <li class="nav-item">
+                        <a class="nav-link" href="#menu">menu</a>
+                        </li>
+       
+                         
+
+                     
+
+                        @if (!User.Identity.IsAuthenticated)
+                        {
+                            <li class="nav-item dropdown no-arrow">
+                                <a asp-action="Login" asp-controller="account" class="text-primary nav-link dropdown-toggle login-link" >
+                                    Log In
+                                </a>
+                            </li>
+                            <li class="nav-item dropdown no-arrow">
+                                <a asp-action="Register" asp-controller="Account" class="nav-link dropdown-toggle">
+                                    <button class="btn btn-primary btn-user">Register</button>
+                                </a>
+                            </li>
+                        }
+
+                        <!-- Nav Item - User Information -->
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    @if(user!=null){
+                                        <span class="mr-2 d-none d-lg-inline text-gray-600 small">@user.FullName</span>
+                                    }
+                                    <img class="img-profile rounded-circle"
+                                        src="~/img/undraw_profile.svg">
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                    aria-labelledby="userDropdown">
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Profile
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Settings
+                                    </a>
+                                    <a class="dropdown-item" href="#">
+                                        <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Activity Log
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+                        }
+
+                    </ul>
+
+                </nav>
+
+               
+             
+                <div class="row bm-6 ml-3 px-5 ا">
+<div id="carouselExampleSlidesOnly" class="carousel slide  w-25 p-3" data-bs-ride="carousel " >
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="/img/testimonial-img.png" class="d-block w-100" alt="...">
+    </div>
+  </div>
+</div>
+  <div class="col-lg-6 py-6">
+                                <div class="banner-text">
+                                    <h1 class="h1-title">
+                                        Welcome to our
+                                     
+                                        restaurant.
+                                    </h1>
+                                    <p>This is Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam eius
+                                        vel tempore consectetur nesciunt? Nam eius tenetur recusandae optio aperiam.</p>
+                                    <div class="banner-btn mt-4">
+                                        <a href="#Main" class="sec-btn">Check our Menu</a>
+                                    </div>
+                                </div>
+                            </div>
+</div>
+
+ <section class="two-col-sec section">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-5">
+                            <div class="sec-img mt-5">
+                                <img src="/img/pizza.png" alt="">
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <div class="sec-text">
+                                <h2 class="xxl-title">Chicken Pepperoni</h2>
+                                <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet dolores
+                                    eligendi earum eveniet soluta officiis asperiores repellat, eum praesentium nihil
+                                    totam. Non ipsa expedita repellat atque mollitia praesentium assumenda quo
+                                    distinctio excepturi nobis tenetur, cum ab vitae fugiat hic aspernatur? Quos
+                                    laboriosam, repudiandae exercitationem atque a excepturi vel. Voluptas, ipsa.</p>
+                                <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. At fugit laborum
+                                    voluptas magnam sed ad illum? Minus officiis quod deserunt.</p>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+              <section class="two-col-sec section pt-0">
+                <div class="container">
+                    <div class="row align-items-center">
+                        <div class="col-lg-6 order-lg-1 order-2">
+                            <div class="sec-text">
+                                <h2 class="xxl-title">Chicken Pepperoni</h2>
+                                <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet dolores
+                                    eligendi earum eveniet soluta officiis asperiores repellat, eum praesentium nihil
+                                    totam. Non ipsa expedita repellat atque mollitia praesentium assumenda quo
+                                    distinctio excepturi nobis tenetur, cum ab vitae fugiat hic aspernatur? Quos
+                                    laboriosam, repudiandae exercitationem atque a excepturi vel. Voluptas, ipsa.</p>
+                                <p>This is Lorem ipsum dolor sit amet consectetur adipisicing elit. At fugit laborum
+                                    voluptas magnam sed ad illum? Minus officiis quod deserunt.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 order-lg-2 order-1">
+                            <div class="sec-img">
+                                <img src="/img/sushi.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+
+
+
+
+
+                <!-- Begin Page Content -->
+                <div class="container m-5 " id="Main"> <h2 class="xxl-title">Our Menu</h2></div>
+               
+                <div class="container-fluid">
+                    @RenderBody()
+
+                
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+                <div class="mt-5 container">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Your Website 2020</span>
+                    </div>
+                </div>
+
+            <!-- Footer -->
+            <!--
+            <footer class="sticky-footer bg-white">
+            </footer> -->
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" asp-action="Logout" asp-controller="Account">Logout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <script src="~/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/js/sb-admin-2.min.js"></script>
+
+    @await RenderSectionAsync("Scripts", required: false)
+      @await Component.InvokeAsync("NToastNotify")
+
+</body>
+
+</html>

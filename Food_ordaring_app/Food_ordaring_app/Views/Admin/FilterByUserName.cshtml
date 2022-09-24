@@ -1,0 +1,34 @@
+﻿@inject UserManager<AppUser> userManager
+@model List<string> 
+
+    @{
+
+    Layout = "_Layout";
+
+    List <string> names=new List<string>();
+    Dictionary<string, string> customer = new Dictionary<string, string>();
+
+   foreach (var str in Model)
+{
+    var user = await userManager.FindByIdAsync(str);
+    
+    if (!customer.ContainsKey(user.UserName))
+        customer.Add( user.UserName,str);
+}
+}
+
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active">
+    Name Of Customers
+  </a>
+   @foreach(var name in customer  ){
+            
+                
+             
+  <a  class="list-group-item list-group-item-action " asp-action="CustomerOrders" asp-controller="Admin"  
+  asp-route-UserId="@name.Value"  >
+ @name.Key
+  
+  </a>
+                }
+</div>

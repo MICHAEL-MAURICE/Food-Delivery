@@ -1,0 +1,32 @@
+﻿@inject UserManager<AppUser> userManager
+@model List<Product>
+
+<div class="container-fluid row">
+    
+    @foreach(var prodct in Model){
+         
+<div class="card m-3 " style="width: 18rem;">
+  <img class="card-img-top " src=@prodct.ImgageUrl alt="Card image cap">
+  <div class="card-body">
+    <h5 class="card-title">@prodct.Name</h5>
+    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+   
+
+                @if (User.Identity.IsAuthenticated && User.IsInRole("Customer"))
+                {
+
+                  
+            
+                   
+                    <a asp-action="Create" asp-controller="OrderController1" asp-route-userId="@userManager.GetUserId(User)" asp-route-Productid="@prodct.Id" class="btn btn-primary">Place a new order</a>
+                        }
+                       @if (!User.Identity.IsAuthenticated){
+                           
+                            <h2 class="text-danger">Please Login to Place an order</h2>
+                        }
+                       
+  </div>
+
+</div>
+    }
+</div>

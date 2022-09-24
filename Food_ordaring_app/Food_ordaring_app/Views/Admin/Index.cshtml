@@ -1,0 +1,53 @@
+﻿@inject UserManager<AppUser> userManager
+@model List<Order> 
+@{
+
+   Layout = "_Layout";
+
+}
+
+
+<table class="table"  >
+  <thead >
+    <tr>
+      
+      <th scope="col">User Name</th>
+      <th scope="col">Date</th>
+      <th scope="col">INFO</th>
+    </tr>
+  </thead>
+  <tbody>
+      
+      @foreach(var order in Model  ){
+            <tr>
+               
+                <td>@order.User.FullName</td>
+      <td>@order.Date</td>
+      <td> <a  id="Id"  class="btn btn-outline-info"  data-bs-toggle="pill" onclick="getData('@order.Id')" > Info</a> </td>
+    </tr>
+   }
+    
+  </tbody>
+</table>
+
+<div id="div1"></div>
+<script>
+
+
+    function getData(orderid){
+        console.log("orderid");
+        var id=$("#Id").val();
+  $.ajax({url: "/Admin/getorderDetailes"
+  
+  ,data:{Id:orderid}
+  
+  , success: function(result){
+
+      //alert(result);
+    $("#div1").html(result);
+  }});
+    }
+
+
+</script>
+

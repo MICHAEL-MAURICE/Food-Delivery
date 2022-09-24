@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "960f25a7-92b1-4d2c-879f-ddd2865c957a": {
+      "ProjectGuid": "960f25a7-92b1-4d2c-879f-ddd2865c957a",
+      "DisplayName": "Food_ordaring_app",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
